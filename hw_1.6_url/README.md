@@ -6,7 +6,7 @@ Given input text, this program identifies all the urls that meet the following D
 3. Contain .com .edu .org .net .gov (`coolbeans.org/coffee`)
 
 **STATUS.**
-This project is in progress.
+This project is in completed.
 
 ## Setup 
 This program only requires python.

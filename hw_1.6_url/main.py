@@ -3,7 +3,7 @@ def get_urls(input: str) -> list[str]:
     """
     Gets URLS from input text
     :param input    String input to parse.
-    :return     List of urls.
+    :return         List of urls.
     """
 
     input = input.split()
@@ -29,7 +29,7 @@ def check_http(word: str) -> bool:
     """
     Checks if the word is a http url
     :param word     Word to check
-    :return     True if the word is an http url, else False
+    :return         True if the word is an http url, else False
     """
     return word[0:4] == "http"
 
@@ -38,10 +38,9 @@ def check_ip(word: str):
     """
     Checks if the word is a ip url
     :param word     Word to check
-    :return     True if the word is an ip url, else False
+    :return         True if the word is an ip url, else False
     """
     
-    # TODO: replace this with re.split
     for delimiter in [".", "/"]:
         word = " ".join(word.split(delimiter))
     split_url = word.split()
@@ -53,14 +52,13 @@ def check_ip(word: str):
                 return False
         return True
     return False
-    
 
 
 def check_suffix(word: str):
     """
     Checks if the word has a proper url domain suffix (com .edu .org .net .gov)
     :param word     Word to check
-    :return     True if the word is a url, else False
+    :return         True if the word is a url, else False
     """
     suffixes = {
         "com" : "",
@@ -69,7 +67,6 @@ def check_suffix(word: str):
         "gov" : "",
     }
 
-    # TODO: replace this with re.split
     for delimiter in [".", "/"]:
         word = " ".join(word.split(delimiter))
     split_url = word.split()
@@ -82,7 +79,6 @@ def check_suffix(word: str):
                 return False
 
     return False
-
 
 
 def main():
