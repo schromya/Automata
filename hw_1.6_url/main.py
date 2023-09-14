@@ -41,6 +41,7 @@ def check_ip(word: str):
     :return         True if the word is an ip url, else False
     """
     
+    # Creates list by splitting on . and / 
     for delimiter in [".", "/"]:
         word = " ".join(word.split(delimiter))
     split_url = word.split()
@@ -67,6 +68,7 @@ def check_suffix(word: str):
         "gov" : "",
     }
 
+    # Creates list by splitting on . and / 
     for delimiter in [".", "/"]:
         word = " ".join(word.split(delimiter))
     split_url = word.split()
