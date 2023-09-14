@@ -12,13 +12,17 @@ def get_urls(input: str) -> list[str]:
     for word in input:
         if check_http(word):
             urls.append(word)
-            break
+            continue
 
         if check_ip(word):
-            pass
+            urls.append(word)
+            continue
         
         if check_suffix(word):
-            pass
+            urls.append(word)
+            continue
+
+    return urls
 
 
 def check_http(word: str) -> bool:
@@ -70,7 +74,6 @@ def check_suffix(word: str):
         word = " ".join(word.split(delimiter))
     split_url = word.split()
 
-
     if len(split_url) >= 2:
         for portion in split_url:
             if portion in suffixes:
@@ -82,28 +85,23 @@ def check_suffix(word: str):
 
 
 
-
-
-
-
 def main():
-    input = "Hello Myra, you can email me at automata907@alaska.org or visit the website at\
-    alaska.org/automata and learn about the theory of computing! Or call me at 907.786.1234.\
-    Another way to learn about automata is to visit 192.229.210.176/automata_theory/index.htm or\
-    to go to https://en.wikipedia.org/wiki/Automata_theory for more information. Mr.Foo posted in\
-    section 999.10.34.997 about the equivalence between finite state automata and regular\
-    expressions. He regularly updates www.automata.com with the latest developments."
+    input = """
+    Hello Myra, you can email me at automata907@alaska.org or visit the website at
+    alaska.org/automata and learn about the theory of computing! Or call me at 
+    907.786.1234.Another way to learn about automata is to visit 
+    192.229.210.176/automata_theory/index.htm or to go to
+    https://en.wikipedia.org/wiki/Automata_theory for more information. Mr.Foo posted 
+    in section 999.10.34.997 about the equivalence between finite state automata and 
+    regular expressions. He regularly updates www.automata.com with the latest 
+    developments.
+    """
 
-    # print(check_ip("https://en.wikipedia.org/wiki/Automata_theory"))
-    # print(check_ip("999.10.34.997"))
-    # print(check_ip("192.229.210.176/automata_theory/index.htm"))
-    # print(check_ip("192.229.210.176"))
-
-    print(check_suffix("automata907@alaska.org"))
-    print(check_suffix("alaska.org/automata"))
-    print(check_suffix("192.229.210.176/automata_theory/index.htm"))
-    print(check_suffix("https://en.wikipedia.org/wiki/Automata_theory"))
-    print(check_suffix("www.automata.com"))
+    print("-------------------------------------Original Text-------------------------------------")
+    print(input)
+    print("\n-------------------------------------Parsed URLs-------------------------------------")
+    for url in get_urls(input):
+        print(" ", url)
 
 if __name__ == "__main__":
     main()
