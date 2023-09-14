@@ -1,11 +1,4 @@
-
-# def break_up_text(input: str) -> list[str]:
-#     """
-#     Breaks input text into a list of words
-#     :param input    String input to break into text
-#     :return     List of words.
-#     """
-#     return input.split()
+import re
 
 def get_urls(input: str) -> list[str]:
     """
@@ -37,12 +30,28 @@ def check_http(word: str) -> bool:
     """
     return word[0:4] == "http"
 
+
 def check_ip(word: str):
     """
     Checks if the word is a ip url
     :param word     Word to check
     :return     True if the word is an ip url, else False
     """
+    
+    # TODO: replace this with re.split
+    for delimiter in [".", "/"]:
+        word = " ".join(word.split(delimiter))
+    split_url = word.split()
+
+    IP_SIZE = 4
+    if len(split_url) >= IP_SIZE:
+        for octet in split_url[:4]:
+            if not octet.isnumeric() or int(octet) < 0 or int(octet) > 255:
+                return False
+        return True
+    return False
+    
+
 
 def check_suffix(word: str):
     """
@@ -63,7 +72,10 @@ def main():
     section 999.10.34.997 about the equivalence between finite state automata and regular\
     expressions. He regularly updates www.automata.com with the latest developments."
 
-    print(check_http("https://en.wikipedia.org/wiki/Automata_theory"))
+    print(check_ip("https://en.wikipedia.org/wiki/Automata_theory"))
+    print(check_ip("999.10.34.997"))
+    print(check_ip("192.229.210.176/automata_theory/index.htm"))
+    print(check_ip("192.229.210.176"))
 
 if __name__ == "__main__":
     main()
