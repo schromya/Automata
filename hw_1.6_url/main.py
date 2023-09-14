@@ -1,4 +1,3 @@
-import re
 
 def get_urls(input: str) -> list[str]:
     """
@@ -59,6 +58,29 @@ def check_suffix(word: str):
     :param word     Word to check
     :return     True if the word is a url, else False
     """
+    suffixes = {
+        "com" : "",
+        "org" : "",
+        "edu" : "",
+        "gov" : "",
+    }
+
+    # TODO: replace this with re.split
+    for delimiter in [".", "/"]:
+        word = " ".join(word.split(delimiter))
+    split_url = word.split()
+
+
+    if len(split_url) >= 2:
+        for portion in split_url:
+            if portion in suffixes:
+                return True  # Rest of the url can be anything
+            elif "@" in portion:
+                return False
+
+    return False
+
+
 
 
 
@@ -72,10 +94,16 @@ def main():
     section 999.10.34.997 about the equivalence between finite state automata and regular\
     expressions. He regularly updates www.automata.com with the latest developments."
 
-    print(check_ip("https://en.wikipedia.org/wiki/Automata_theory"))
-    print(check_ip("999.10.34.997"))
-    print(check_ip("192.229.210.176/automata_theory/index.htm"))
-    print(check_ip("192.229.210.176"))
+    # print(check_ip("https://en.wikipedia.org/wiki/Automata_theory"))
+    # print(check_ip("999.10.34.997"))
+    # print(check_ip("192.229.210.176/automata_theory/index.htm"))
+    # print(check_ip("192.229.210.176"))
+
+    print(check_suffix("automata907@alaska.org"))
+    print(check_suffix("alaska.org/automata"))
+    print(check_suffix("192.229.210.176/automata_theory/index.htm"))
+    print(check_suffix("https://en.wikipedia.org/wiki/Automata_theory"))
+    print(check_suffix("www.automata.com"))
 
 if __name__ == "__main__":
     main()
