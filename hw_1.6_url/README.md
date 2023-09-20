@@ -14,3 +14,5 @@ This program only requires python.
 ## Usage
 In this directory, run `python main.py`. The output of this program will be printed to the terminal.
 In order to test this program on different text, replace the text in the input variable in main.
+
+![Output](screenshot.png)
